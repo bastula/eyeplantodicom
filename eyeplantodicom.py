@@ -102,7 +102,8 @@ class EyeplanToDICOM(object):
         self.rd.Rows = dosegrid.shape[1]
         self.rd.Columns = dosegrid.shape[2]
         self.rd.NumberOfFrames = dosegrid.shape[0]
-        del self.rd.DVHs
+        if 'DVHs' in self.rd:
+            del self.rd.DVHs
 
         # Update the UIDs
         self.rd.SOPInstanceUID = dicom.UID.generate_uid(None)
